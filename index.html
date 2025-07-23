@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AML Team Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Vanta.js Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+        } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+        }
+    </script>
+</head>
+<body class="bg-[#23153c] dark:bg-[#23153c] light:bg-white text-white dark:text-white light:text-[#23153c]">
+    <!-- Particle Canvas Background -->
+    <canvas id="particle-canvas" class="particle-canvas"></canvas>
+
+    <!-- Header & Navigation -->
+    <header class="bg-[#23153c]/90 dark:bg-[#23153c]/90 light:bg-white/90 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="text-2xl font-bold text-white dark:text-white light:text-[#23153c] nav-link" data-page="home">
+                    <i class="fas fa-shield-halved text-[#ff3f81]"></i> AML Hub
+                </a>
+                <div class="flex items-center space-x-6">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="text-gray-300 dark:text-gray-300 light:text-[#23153c] focus:outline-none">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    
+                    <div class="hidden md:flex items-center space-x-8" id="desktop-nav">
+                        <a class="nav-link active text-white dark:text-white light:text-[#23153c] font-medium" data-page="home">Home</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="about">About</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="resources">Resources</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="engagement">Engagement</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="roll-of-honour">Roll of Honour</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="calendar">Calendar</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="watchlist">The Watchlist</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-white dark:text-white light:text-[#23153c] focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+             <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link active" data-page="home">Home</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="about">About</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="resources">Resources</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="engagement">Engagement</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="roll-of-honour">Roll of Honour</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="calendar">Calendar</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="watchlist">The Watchlist</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Page Content -->
+        <div id="page-home" class="page-content active">
+            <section class="hero-section fade-in">
+                <!-- Vanta.js Globe Effect -->
+                <div id="vanta-globe" class="vanta-background"></div>
+                
+                <div class="hero-content relative z-10">
+                    <div class="px-6 text-center mb-16">
+                        <h1 class="text-4xl md:text-6xl font-extrabold text-white dark:text-white light:text-[#23153c] leading-tight">
+                            Guarding the Gates of Commerce
+                        </h1>
+                        <p class="mt-4 text-xl text-gray-300 dark:text-gray-300 light:text-[#23153c] max-w-3xl mx-auto">
+                            We are the <span class="font-semibold text-[#ff3f81]">SDC AML Team</span>, a globally distributed force dedicated to protecting Stripe and its users from financial crime.
+                        </p>
+                    </div>
+
+                    <div class="px-6 text-center mb-20">
+                        <h2 class="text-3xl font-bold text-white dark:text-white light:text-[#23153c] mb-4">
+                            Our Global Footprint
+                        </h2>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-[#23153c] max-w-2xl mx-auto mt-3">
+                            Our team's scale and expertise are critical to maintaining a safe financial ecosystem for millions of users worldwide.
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-8">
+                            <div class="card bg-[#2d1c4a] dark:bg-[#2d1c4a] light:bg-white p-8 rounded-lg text-center float-animation border border-[#3d2a5c] dark:border-[#3d2a5c] light:border-gray-200 light:shadow-md">
+                                <div class="text-5xl font-extrabold text-[#ff3f81] dark:text-[#ff3f81] light:text-[#ff3f81]">100+</div>
+                                <h4 class="text-xl font-semibold mt-2 text-white dark:text-white light:text-[#23153c]">Team Members</h4>
+                                <p class="text-gray-300 dark:text-gray-300 light:text-[#23153c] mt-1">A growing force of dedicated professionals.</p>
+                            </div>
+                            <div class="card bg-[#2d1c4a] dark:bg-[#2d1c4a] light:bg-white p-8 rounded-lg text-center float-animation border border-[#3d2a5c] dark:border-[#3d2a5c] light:border-gray-200 light:shadow-md" style="animation-delay: 0.2s;">
+                                <div class="text-5xl font-extrabold text-[#ff3f81] dark:text-[#ff3f81] light:text-[#ff3f81]">4+</div>
+                                <h4 class="text-xl font-semibold mt-2 text-white dark:text-white light:text-[#23153c]">Global Regions</h4>
+                                <p class="text-gray-300 dark:text-gray-300 light:text-[#23153c] mt-1">Operating across US, LATAM, EMEA & APAC.</p>
+                            </div>
+                            <div class="card bg-[#2d1c4a] dark:bg-[#2d1c4a] light:bg-white p-8 rounded-lg text-center float-animation border border-[#3d2a5c] dark:border-[#3d2a5c] light:border-gray-200 light:shadow-md" style="animation-delay: 0.4s;">
+                                <div class="text-5xl font-extrabold text-[#ff3f81] dark:text-[#ff3f81] light:text-[#ff3f81]"><i class="fas fa-infinity"></i></div>
+                                <h4 class="text-xl font-semibold mt-2 text-white dark:text-white light:text-[#23153c]">Endless Impact</h4>
+                                <p class="text-gray-300 dark:text-gray-300 light:text-[#23153c] mt-1">Protecting millions of transactions daily.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="py-20 -mx-0 px-6 rounded-lg constellation-bg">
+                        <div class="container mx-auto constellation-content">
+                            <div class="text-center mb-12">
+                                <h2 class="text-3xl font-bold text-white">A Glimpse Into Our Work</h2>
+                                <p class="text-gray-300 max-w-2xl mx-auto mt-3">Our team is comprised of several specialized functions, all working together to achieve our core mission.</p>
+                            </div>
+                            <div id="home-accordion" class="max-w-3xl mx-auto space-y-4">
+                                <!-- Home Accordion Items will be injected here by JS -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <!-- New Org Chart Section -->
+                    <div class="w-full pt-20 px-6 constellation-bg">
+                        <h2 class="text-3xl font-bold text-white text-center mb-12 constellation-content">AML Leadership Structure</h2>
+                        <div id="org-chart-container" class="org-chart constellation-content">
+                            <!-- JS will inject the chart here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page Content -->
+        <div id="page-about" class="page-content">
+             <section class="py-20 fade-in">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold text-gray-900">About Our Team</h2>
+                        <p class="mt-3 text-lg text-gray-600">Our commitment to excellence and integrity.</p>
+                    </div>
+                     <div class="bg-white p-8 rounded-lg shadow-md mb-12 max-w-4xl mx-auto">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Introduction to the AML Team</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Global Compliance is a risk management function overseeing regulatory compliance, product compliance, financial crimes, and enterprise risk management through oversight, advice, and controls. Global Compliance, part of the Legal Org, consists of five closely coordinated pillars. Financial Crimes (FC) is one of the pillars.
+                            <br><br>
+                            FC helps to protect Stripe and its users from financial crimes. Our work includes financial crime prevention (stopping criminals from using our platform) and financial crime compliance (adherence to regulatory and partner requirements).
+                            <br><br>
+                            FC Operations at SDC consists of four teams: Anti-Money Laundering (AML), Sanctions, Enhanced Due Diligence (EDD) and Financial Crimes Ops Support (FoS).
+                         </p>
+                     </div>
+                    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        <div class="card bg-white p-8 rounded-lg shadow-md">
+                            <div class="text-3xl text-indigo-500 mb-4"><i class="fas fa-bullseye"></i></div>
+                            <h3 class="text-2xl font-bold mb-3">Our Vision</h3>
+                            <p class="text-gray-600 leading-relaxed">To be the operational powerhouse behind Stripe's Financial Crime function, ensuring safe and successful deployment of products. We're committed to excellence, making every process airtight, efficient, and effective. As stewards of trust, we operationalize rigorous standards to keep our platform secure and users confident.</p>
+                        </div>
+                        <div class="card bg-white p-8 rounded-lg shadow-md">
+                            <div class="text-3xl text-indigo-500 mb-4"><i class="fas fa-map-signs"></i></div>
+                            <h3 class="text-2xl font-bold mb-3">Our Strategy</h3>
+                            <p class="text-gray-600 leading-relaxed">Our strategy aligns us around the work we need to do together to achieve success. By outlining a clear strategy all SDC FC Stripes can understand, we distill it into a concrete, measurable set of SDC-FC-level SOKRs to evaluate our progress throughout the upcoming year.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Resources Page Content -->
+        <div id="page-resources" class="page-content">
+             <section class="py-20 fade-in">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl font-bold text-gray-900">AML Resources & Knowledge Hub</h1>
+                        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Your central location for procedures, referral guides, and definitions of unusual activity.</p>
+                    </div>
+                     <div id="resources-content" class="space-y-8 max-w-4xl mx-auto">
+                        <!-- JS will inject the new, interactive resources content here -->
+                     </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Engagement Page Content -->
+        <div id="page-engagement" class="page-content">
+             <section class="py-20 fade-in">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-bold text-gray-900">The Engagement Committee</h2>
+                        <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">Your go-to team for fun, recognition, and team spirit! We're here to make our workplace more vibrant and celebratory.</p>
+                        <div class="mt-4 text-gray-500">
+                            <span class="font-semibold">Committee Members:</span> Divya Nayak (Lead), Nanda Krishnan U Nair, Aman Husain, Sanchana Purusothaman, Jayanth Kumar, Avinav Chel, Ajay Ashok
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-gray-800 text-center mb-12">A Look Back at Last Quarter's Buzz!</h3>
+                        <div class="max-w-4xl mx-auto">
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-star"></i></div>
+                                <h4 class="font-bold text-xl text-gray-800 mb-1">The Spark of Something Big (Late May)</h4>
+                                <p class="text-gray-600">The quarter kicked off with a spark of excitement! We dropped a teaser, hinting at a grand celebration to honor the team's incredible contributions. The anticipation started building, and everyone knew something special was on the horizon! 🤫🎉</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-tshirt"></i></div>
+                                <h4 class="font-bold text-xl text-gray-800 mb-1">Runway to Rewards: Fashion Show! (Late May)</h4>
+                                <p class="text-gray-600 mb-4">We then unveiled the first big surprise: the all-inclusive FC Fashion Show! A call went out for everyone to bring their team spirit to the runway. It was an amazing opportunity to showcase talent, cheer for colleagues, and build excitement for the main R&R event.</p>
+                                <img src="images/Fashion Show Event Registration.jpg" alt="Fashion Show Poster" class="mt-4 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/800x1200/e0e0e0/333?text=Image+Not+Found';">
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-calendar-check"></i></div>
+                                <h4 class="font-bold text-xl text-gray-800 mb-1">The Main Event: R&R Ceremony (Early June)</h4>
+                                <p class="text-gray-600 mb-4">The official invitation dropped for the SDC Financial Crimes Team Rewards & Recognition ceremony on June 13th. The cafeteria on the 10th floor was set to become a stage for celebrating our outstanding team members, with the much-anticipated FC Fashion Show as a highlight.</p>
+                                 <img src="images/SDC Financial Crimes team.jpg" alt="R&R Event Poster" class="mt-4 rounded-lg shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/800x1200/e0e0e0/333?text=Image+Not+Found';">
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-film"></i></div>
+                                <h4 class="font-bold text-xl text-gray-800 mb-1">Bollywood Glam & After Party (Mid June)</h4>
+                                <p class="text-gray-600">To make the celebration unforgettable, we announced the theme: Bollywood Glam! Everyone was encouraged to channel their inner movie star. And what's a celebration without a party? The team was invited to an epic after-party at Magique, Koramangala, to dance the night away. It was a blockbuster ending to a fantastic quarter! 🕺💃</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Roll of Honour Page Content -->
+        <div id="page-roll-of-honour" class="page-content">
+             <section class="py-20 bg-white fade-in">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold text-gray-900">Roll of Honour</h2>
+                        <p class="mt-3 text-lg text-gray-600">Celebrating our team's outstanding contributions.</p>
+                    </div>
+                    <div class="max-w-5xl mx-auto relative">
+                        <div id="rnr-carousel" class="relative overflow-hidden rounded-lg shadow-lg bg-gray-50 p-8 min-h-[450px]">
+                            <!-- Rewards & Recognition Slide -->
+                            <div class="rnr-carousel-item duration-700 ease-in-out">
+                                <h3 class="text-2xl font-bold text-center mb-6 text-indigo-600">Rewards & Recognition</h3>
+                                <div class="grid md:grid-cols-2 gap-x-8 gap-y-10 text-left">
+                                    <div class="bg-white p-4 rounded-lg shadow">
+                                        <h4 class="font-bold text-lg mb-3 text-amber-500 flex items-center"><i class="fas fa-star mr-2"></i>Spot Awards</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            <li>Akansha</li>
+                                            <li>Khushi Khandelwal</li>
+                                            <li>Nagaruru Nithya Sai Rachana</li>
+                                            <li>Padma Lochan Choudhury</li>
+                                            <li>Sabhya Punjabi</li>
+                                            <li>Srishti Bhandary</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-lg shadow">
+                                        <h4 class="font-bold text-lg mb-3 text-blue-500 flex items-center"><i class="fas fa-trophy mr-2"></i>SDC Awards</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            <li>Aanchal Mutreja</li>
+                                            <li>Aman Husain</li>
+                                            <li>Manish Kumar Sahu</li>
+                                            <li>Shwetabh Trivedi</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-lg shadow md:col-span-2">
+                                        <h4 class="font-bold text-lg mb-3 text-green-500 flex items-center"><i class="fas fa-chart-line mr-2"></i>Half Yearly H1 - 2025</h4>
+                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                            <li>Aman Husain</li>
+                                            <li>Nanda Krishnan</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Kudos Slide -->
+                             <div class="rnr-carousel-item hidden duration-700 ease-in-out">
+                                <h3 class="text-2xl font-bold text-center mb-6 text-indigo-600">Kudos</h3>
+                                 <div class="space-y-6 text-left max-w-3xl mx-auto">
+                                     <div class="bg-white p-6 rounded-lg shadow">
+                                         <h4 class="font-bold text-lg mb-2 text-gray-700">For the month of June 2025</h4>
+                                         <ul class="list-none space-y-3 text-gray-600">
+                                             <li class="flex items-start"><i class="fas fa-quote-left text-indigo-200 mr-3 mt-1"></i><span><span class="font-semibold">Khushi Khandelwal</span> - For helping out a new hire with a complex case.</span></li>
+                                             <li class="flex items-start"><i class="fas fa-quote-left text-indigo-200 mr-3 mt-1"></i><span><span class="font-semibold">Srishti Bhandary</span> - For proactively identifying a new risk typology.</span></li>
+                                         </ul>
+                                     </div>
+                                      <div class="bg-white p-6 rounded-lg shadow">
+                                         <h4 class="font-bold text-lg mb-2 text-gray-700">For the month of May 2025</h4>
+                                         <ul class="list-none space-y-3 text-gray-600">
+                                             <li class="flex items-start"><i class="fas fa-quote-left text-indigo-200 mr-3 mt-1"></i><span><span class="font-semibold">Aman Husain</span> - For successfully leading a project with a tight deadline.</span></li>
+                                             <li class="flex items-start"><i class="fas fa-quote-left text-indigo-200 mr-3 mt-1"></i><span><span class="font-semibold">Manish Kumar Sahu</span> - For creating a new tool that improved team's efficiency.</span></li>
+                                         </ul>
+                                     </div>
+                                 </div>
+                             </div>
+                            <!-- Shoutouts Slide -->
+                             <div class="rnr-carousel-item hidden duration-700 ease-in-out">
+                                <h3 class="text-2xl font-bold text-center mb-6 text-indigo-600">Shoutouts</h3>
+                                <div class="space-y-6 text-left max-w-3xl mx-auto">
+                                     <div class="bg-white p-6 rounded-lg shadow">
+                                         <h4 class="font-bold text-lg mb-2 text-green-600 flex items-center"><i class="fas fa-award mr-2"></i>100% Quality in Q2 2025</h4>
+                                         <p class="text-gray-600">A huge congratulations to the following team members for their outstanding commitment to quality!</p>
+                                         <div class="flex flex-wrap gap-2 mt-3">
+                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Aanchal Mutreja</span>
+                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Aman Husain</span>
+                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Manish Kumar Sahu</span>
+                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Shwetabh Trivedi</span>
+                                         </div>
+                                     </div>
+                                      <div class="bg-white p-6 rounded-lg shadow">
+                                         <h4 class="font-bold text-lg mb-2 text-green-600 flex items-center"><i class="fas fa-award mr-2"></i>100% Quality in Q1 2025</h4>
+                                         <p class="text-gray-600">A big round of applause for these individuals who set the bar high at the start of the year!</p>
+                                          <div class="flex flex-wrap gap-2 mt-3">
+                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Khushi Khandelwal</span>
+                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Nagaruru Nithya Sai Rachana</span>
+                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Padma Lochan Choudhury</span>
+                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Sabhya Punjabi</span>
+                                          </div>
+                                     </div>
+                                 </div>
+                             </div>
+                        </div>
+                        <!-- Carousel Controls -->
+                        <button id="rnr-prevBtn" class="absolute top-1/2 left-0 md:-left-12 transform -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-3 shadow-md transition"><i class="fas fa-chevron-left text-gray-700"></i></button>
+                        <button id="rnr-nextBtn" class="absolute top-1/2 right-0 md:-right-12 transform -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-3 shadow-md transition"><i class="fas fa-chevron-right text-gray-700"></i></button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Calendar Page Content -->
+        <div id="page-calendar" class="page-content">
+            <section class="py-20 fade-in">
+                 <div class="container mx-auto px-6">
+                     <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold text-gray-900">The AML Calendar</h2>
+                        <p class="mt-3 text-lg text-gray-600">Don't miss out on our upcoming events.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-red-100 text-red-600 p-3 rounded-lg mr-4">
+                                   <i class="fas fa-glass-cheers"></i>
+                                </div>
+                                <div>
+                                   <h3 class="font-bold text-lg">Team Social Mixer</h3>
+                                   <p class="text-sm text-gray-500">Q3 - Date TBD</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">Get ready for our quarterly AML team party! More details on the venue and theme coming soon.</p>
+                        </div>
+                         <div class="card bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-yellow-100 text-yellow-600 p-3 rounded-lg mr-4">
+                                   <i class="fas fa-award"></i>
+                                </div>
+                                <div>
+                                   <h3 class="font-bold text-lg">R&R Ceremony</h3>
+                                   <p class="text-sm text-gray-500">Q3 - Date TBD</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">Join us as we celebrate the winners of the quarterly Rewards & Recognition program.</p>
+                        </div>
+                         <div class="card bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 text-blue-600 p-3 rounded-lg mr-4">
+                                   <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                   <h3 class="font-bold text-lg">FC All-Hands</h3>
+                                   <p class="text-sm text-gray-500">Q3 - Date TBD</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600">An organization-wide meeting to discuss our progress, goals, and future direction.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Watchlist Page Content -->
+        <div id="page-watchlist" class="page-content">
+             <section class="py-20 fade-in">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold text-gray-900">The Watchlist</h2>
+                        <p class="mt-3 text-lg text-gray-600">Your quarterly newsletter for all things AML and Stripe.</p>
+                    </div>
+                    <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-inner">
+                        <div class="flex items-start">
+                            <div class="text-4xl text-indigo-500 mr-6 mt-1"><i class="fas fa-newspaper"></i></div>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-3">Stay Updated</h3>
+                                <p class="text-gray-600 leading-relaxed">The Watchlist is your go-to source for current updates specific to AML and Stripe. Here, we'll share information about new tooling, innovative ideas from the team, and key industry trends. Check back each quarter for the latest issue!</p>
+                                <a href="#" class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">Read the Latest Edition <i class="fas fa-arrow-right ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 SDC AML Team. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">Built with <i class="fas fa-heart text-red-500"></i> for the best team.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
