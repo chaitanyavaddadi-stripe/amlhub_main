@@ -22,32 +22,46 @@
         }
     </script>
 </head>
-<body class="bg-[#23153c] dark:bg-[#23153c] light:bg-white text-white dark:text-white light:text-[#23153c]">
+<body class="bg-[#23153c] dark:bg-[#23153c] text-white dark:text-white light:text-[#23153c]">
+    <!-- Global Vanta Globe Background -->
+    <div id="vanta-globe" class="vanta-background"></div>
     <!-- Particle Canvas Background -->
     <canvas id="particle-canvas" class="particle-canvas"></canvas>
 
     <!-- Header & Navigation -->
-    <header class="bg-[#23153c]/90 dark:bg-[#23153c]/90 light:bg-white/90 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+    <header class="sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <a href="#" class="text-2xl font-bold text-white dark:text-white light:text-[#23153c] nav-link" data-page="home">
-                    <i class="fas fa-shield-halved text-[#ff3f81]"></i> AML Hub
+                <a href="#" class="nav-link logo-container-enhanced" data-page="home">
+                    <div class="logo-wrapper">
+                        <!-- Existing Logo Images -->
+                        <div class="logo-images">
+                            <img src="images/logo_light.png" alt="AML Hub" class="logo-image logo-light" />
+                            <img src="images/logo_dark.png" alt="AML Hub" class="logo-image logo-dark" />
+                        </div>
+                        
+                        <!-- Animated Text -->
+                        <div class="logo-text-container">
+                            <span class="logo-text-animated">ANTI MONEY LAUNDERING</span>
+                        </div>
+                    </div>
                 </a>
                 <div class="flex items-center space-x-6">
                     <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="text-gray-300 dark:text-gray-300 light:text-[#23153c] focus:outline-none">
-                        <i class="fas fa-moon dark:hidden"></i>
-                        <i class="fas fa-sun hidden dark:block"></i>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                      <span class="toggle-slider"></span>
+                      <span class="toggle-icon sun"><i class="fas fa-sun"></i></span>
+                      <span class="toggle-icon moon"><i class="fas fa-moon"></i></span>
                     </button>
-                    
                     <div class="hidden md:flex items-center space-x-8" id="desktop-nav">
-                        <a class="nav-link active text-white dark:text-white light:text-[#23153c] font-medium" data-page="home">Home</a>
-                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="about">About</a>
-                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="resources">Resources</a>
-                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="engagement">Engagement</a>
-                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="roll-of-honour">Roll of Honour</a>
-                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="calendar">Calendar</a>
-                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="watchlist">The Watchlist</a>
+                        <a class="nav-link active text-white dark:text-white light:text-[#23153c] font-medium" data-page="home"><i class="fas fa-shield-halved nav-icon"></i> Home</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="leads"><i class="fas fa-user-tie nav-icon"></i> Leads</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="resources"><i class="fas fa-book nav-icon"></i> AML Lounge</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="engagement"><i class="fas fa-users nav-icon"></i> Engagement</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="pillars"><i class="fas fa-cubes nav-icon"></i> Pillars</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="roll-of-honour"><i class="fas fa-star nav-icon"></i> Roll of Honour</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="calendar"><i class="fas fa-calendar-alt nav-icon"></i> Calendar</a>
+                        <a class="nav-link text-gray-300 dark:text-gray-300 light:text-[#23153c]" data-page="watchlist"><i class="fas fa-eye nav-icon"></i> The Watchlist</a>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -58,13 +72,14 @@
             </div>
              <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
-                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link active" data-page="home">Home</a>
-                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="about">About</a>
-                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="resources">Resources</a>
-                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="engagement">Engagement</a>
-                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="roll-of-honour">Roll of Honour</a>
-                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="calendar">Calendar</a>
-                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="watchlist">The Watchlist</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link active" data-page="home"><i class="fas fa-shield-halved nav-icon"></i> Home</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="leads"><i class="fas fa-user-tie nav-icon"></i> Leads</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="resources"><i class="fas fa-book nav-icon"></i> Resources</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="engagement"><i class="fas fa-users nav-icon"></i> Engagement</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="pillars"><i class="fas fa-cubes nav-icon"></i> Pillars</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="roll-of-honour"><i class="fas fa-star nav-icon"></i> Roll of Honour</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="calendar"><i class="fas fa-calendar-alt nav-icon"></i> Calendar</a>
+                <a class="block py-2 px-4 text-sm text-gray-300 dark:text-gray-300 light:text-[#23153c] hover:bg-[#2d1c4a] dark:hover:bg-[#2d1c4a] light:hover:bg-gray-100 rounded nav-link" data-page="watchlist"><i class="fas fa-eye nav-icon"></i> The Watchlist</a>
             </div>
         </nav>
     </header>
@@ -73,16 +88,12 @@
         <!-- Home Page Content -->
         <div id="page-home" class="page-content active">
             <section class="hero-section fade-in">
-                <!-- Vanta.js Globe Effect -->
-                <div id="vanta-globe" class="vanta-background"></div>
                 
                 <div class="hero-content relative z-10">
                     <div class="px-6 text-center mb-16">
-                        <h1 class="text-4xl md:text-6xl font-extrabold text-white dark:text-white light:text-[#23153c] leading-tight">
-                            Guarding the Gates of Commerce
-                        </h1>
+                        <h1 class="text-4xl md:text-6xl font-extrabold accent-text">Guarding the Gates of Commerce</h1>
                         <p class="mt-4 text-xl text-gray-300 dark:text-gray-300 light:text-[#23153c] max-w-3xl mx-auto">
-                            We are the <span class="font-semibold text-[#ff3f81]">SDC AML Team</span>, a globally distributed force dedicated to protecting Stripe and its users from financial crime.
+                            We are the <span class="font-semibold accent-text">SDC AML Team</span>, a globally distributed force dedicated to protecting Stripe and its users from financial crime.
                         </p>
                     </div>
 
@@ -94,91 +105,69 @@
                             Our team's scale and expertise are critical to maintaining a safe financial ecosystem for millions of users worldwide.
                         </p>
                         <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-8">
-                            <div class="card bg-[#2d1c4a] dark:bg-[#2d1c4a] light:bg-white p-8 rounded-lg text-center float-animation border border-[#3d2a5c] dark:border-[#3d2a5c] light:border-gray-200 light:shadow-md">
-                                <div class="text-5xl font-extrabold text-[#ff3f81] dark:text-[#ff3f81] light:text-[#ff3f81]">100+</div>
+                            <div class="card p-8 text-center float-animation">
+                                <div class="text-5xl font-extrabold accent-text">100+</div>
                                 <h4 class="text-xl font-semibold mt-2 text-white dark:text-white light:text-[#23153c]">Team Members</h4>
                                 <p class="text-gray-300 dark:text-gray-300 light:text-[#23153c] mt-1">A growing force of dedicated professionals.</p>
                             </div>
-                            <div class="card bg-[#2d1c4a] dark:bg-[#2d1c4a] light:bg-white p-8 rounded-lg text-center float-animation border border-[#3d2a5c] dark:border-[#3d2a5c] light:border-gray-200 light:shadow-md" style="animation-delay: 0.2s;">
-                                <div class="text-5xl font-extrabold text-[#ff3f81] dark:text-[#ff3f81] light:text-[#ff3f81]">4+</div>
+                            <div class="card p-8 text-center float-animation" style="animation-delay: 0.2s;">
+                                <div class="text-5xl font-extrabold accent-text">4+</div>
                                 <h4 class="text-xl font-semibold mt-2 text-white dark:text-white light:text-[#23153c]">Global Regions</h4>
                                 <p class="text-gray-300 dark:text-gray-300 light:text-[#23153c] mt-1">Operating across US, LATAM, EMEA & APAC.</p>
                             </div>
-                            <div class="card bg-[#2d1c4a] dark:bg-[#2d1c4a] light:bg-white p-8 rounded-lg text-center float-animation border border-[#3d2a5c] dark:border-[#3d2a5c] light:border-gray-200 light:shadow-md" style="animation-delay: 0.4s;">
-                                <div class="text-5xl font-extrabold text-[#ff3f81] dark:text-[#ff3f81] light:text-[#ff3f81]"><i class="fas fa-infinity"></i></div>
+                            <div class="card p-8 text-center float-animation" style="animation-delay: 0.4s;">
+                                <div class="text-5xl font-extrabold accent-text"><i class="fas fa-infinity"></i></div>
                                 <h4 class="text-xl font-semibold mt-2 text-white dark:text-white light:text-[#23153c]">Endless Impact</h4>
                                 <p class="text-gray-300 dark:text-gray-300 light:text-[#23153c] mt-1">Protecting millions of transactions daily.</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="py-20 -mx-0 px-6 rounded-lg constellation-bg">
-                        <div class="container mx-auto constellation-content">
-                            <div class="text-center mb-12">
-                                <h2 class="text-3xl font-bold text-white">A Glimpse Into Our Work</h2>
-                                <p class="text-gray-300 max-w-2xl mx-auto mt-3">Our team is comprised of several specialized functions, all working together to achieve our core mission.</p>
-                            </div>
-                            <div id="home-accordion" class="max-w-3xl mx-auto space-y-4">
-                                <!-- Home Accordion Items will be injected here by JS -->
-                            </div>
+                    <!-- Home page: Creative About content layout -->
+                    <div class="w-full px-6 mb-20 fade-in">
+                      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div class="card p-8 floating-text flex flex-col items-center text-center" style="background:rgba(99,91,255,0.07);border-radius:1.5rem;box-shadow:0 4px 32px #635bff11;">
+                          <span class="text-4xl accent-text mb-4"><i class="fas fa-shield-halved"></i></span>
+                          <h3 class="font-bold text-2xl mb-2 accent-text">Who We Are</h3>
+                          <p class="leading-relaxed text-base mb-2">Global Compliance is Stripe's risk management function, overseeing regulatory and product compliance, financial crimes, and enterprise risk. Financial Crimes (FC) is one of five closely coordinated pillars, helping protect Stripe and its users from financial crimes through prevention and compliance.</p>
+                          <span class="italic text-gray-500 text-sm mt-2">"FC Operations at SDC consists of four teams: AML, Sanctions, EDD, and FoS."</span>
                         </div>
-                    </div>
-                    
-                     <!-- New Org Chart Section -->
-                    <div class="w-full pt-20 px-6 constellation-bg">
-                        <h2 class="text-3xl font-bold text-white text-center mb-12 constellation-content">AML Leadership Structure</h2>
-                        <div id="org-chart-container" class="org-chart constellation-content">
-                            <!-- JS will inject the chart here -->
+                        <div class="card p-8 floating-text flex flex-col items-center text-center" style="background:linear-gradient(135deg,#fff 60%,#635bff11 100%);border-radius:1.5rem;box-shadow:0 4px 32px #635bff11;">
+                          <span class="text-4xl accent-text mb-4"><i class="fas fa-bullseye"></i></span>
+                          <h3 class="font-bold text-2xl mb-2 accent-text">Our Vision</h3>
+                          <p class="leading-relaxed text-base">To be the operational powerhouse behind Stripe's Financial Crime function, ensuring safe and successful deployment of products. We're committed to excellence, making every process airtight, efficient, and effective. As stewards of trust, we operationalize rigorous standards to keep our platform secure and users confident.</p>
                         </div>
+                        <div class="card p-8 floating-text flex flex-col items-center text-center" style="background:linear-gradient(135deg,#fff 60%,#635bff11 100%);border-radius:1.5rem;box-shadow:0 4px 32px #635bff11;">
+                          <span class="text-4xl accent-text mb-4"><i class="fas fa-map-signs"></i></span>
+                          <h3 class="font-bold text-2xl mb-2 accent-text">Our Strategy</h3>
+                          <p class="leading-relaxed text-base">Our strategy aligns us around the work we need to do together to achieve success. By outlining a clear strategy all SDC FC Stripes can understand, we distill it into a concrete, measurable set of SDC-FC-level SOKRs to evaluate our progress throughout the upcoming year.</p>
+                        </div>
+                      </div>
+                      <div class="w-full flex justify-center mt-12">
+                        <div class="flex items-center gap-4">
+                          <div class="h-2 w-2 rounded-full bg-[#635bff] opacity-60"></div>
+                          <div class="h-1 w-16 rounded bg-[#635bff] opacity-30"></div>
+                          <div class="h-2 w-2 rounded-full bg-[#635bff] opacity-60"></div>
+                          <div class="h-1 w-16 rounded bg-[#635bff] opacity-30"></div>
+                          <div class="h-2 w-2 rounded-full bg-[#635bff] opacity-60"></div>
+                        </div>
+                      </div>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- About Page Content -->
-        <div id="page-about" class="page-content">
-             <section class="py-20 fade-in">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-12">
-                        <h2 class="text-4xl font-bold text-gray-900">About Our Team</h2>
-                        <p class="mt-3 text-lg text-gray-600">Our commitment to excellence and integrity.</p>
-                    </div>
-                     <div class="bg-white p-8 rounded-lg shadow-md mb-12 max-w-4xl mx-auto">
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Introduction to the AML Team</h3>
-                        <p class="text-gray-600 leading-relaxed">
-                            Global Compliance is a risk management function overseeing regulatory compliance, product compliance, financial crimes, and enterprise risk management through oversight, advice, and controls. Global Compliance, part of the Legal Org, consists of five closely coordinated pillars. Financial Crimes (FC) is one of the pillars.
-                            <br><br>
-                            FC helps to protect Stripe and its users from financial crimes. Our work includes financial crime prevention (stopping criminals from using our platform) and financial crime compliance (adherence to regulatory and partner requirements).
-                            <br><br>
-                            FC Operations at SDC consists of four teams: Anti-Money Laundering (AML), Sanctions, Enhanced Due Diligence (EDD) and Financial Crimes Ops Support (FoS).
-                         </p>
-                     </div>
-                    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                        <div class="card bg-white p-8 rounded-lg shadow-md">
-                            <div class="text-3xl text-indigo-500 mb-4"><i class="fas fa-bullseye"></i></div>
-                            <h3 class="text-2xl font-bold mb-3">Our Vision</h3>
-                            <p class="text-gray-600 leading-relaxed">To be the operational powerhouse behind Stripe's Financial Crime function, ensuring safe and successful deployment of products. We're committed to excellence, making every process airtight, efficient, and effective. As stewards of trust, we operationalize rigorous standards to keep our platform secure and users confident.</p>
-                        </div>
-                        <div class="card bg-white p-8 rounded-lg shadow-md">
-                            <div class="text-3xl text-indigo-500 mb-4"><i class="fas fa-map-signs"></i></div>
-                            <h3 class="text-2xl font-bold mb-3">Our Strategy</h3>
-                            <p class="text-gray-600 leading-relaxed">Our strategy aligns us around the work we need to do together to achieve success. By outlining a clear strategy all SDC FC Stripes can understand, we distill it into a concrete, measurable set of SDC-FC-level SOKRs to evaluate our progress throughout the upcoming year.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        
         <!-- Resources Page Content -->
         <div id="page-resources" class="page-content">
              <section class="py-20 fade-in">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12">
-                        <h1 class="text-4xl font-bold text-gray-900">AML Resources & Knowledge Hub</h1>
-                        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Your central location for procedures, referral guides, and definitions of unusual activity.</p>
+                        <h1 class="text-4xl font-bold accent-text mb-4">AML Lounge</h1>
+                        <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 light:text-[#23153c] max-w-3xl mx-auto">
+                            Your comprehensive guide to AML referrals and suspicious activity reporting. Learn how to identify unusual patterns, create effective referrals, and understand the review process.
+                        </p>
                     </div>
                      <div id="resources-content" class="space-y-8 max-w-4xl mx-auto">
-                        <!-- JS will inject the new, interactive resources content here -->
+                        <!-- JS will inject the AML referrals content here -->
                      </div>
                 </div>
             </section>
@@ -228,97 +217,126 @@
 
         <!-- Roll of Honour Page Content -->
         <div id="page-roll-of-honour" class="page-content">
-             <section class="py-20 bg-white fade-in">
+             <section class="py-20 fade-in">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-bold text-gray-900">Roll of Honour</h2>
-                        <p class="mt-3 text-lg text-gray-600">Celebrating our team's outstanding contributions.</p>
+                        <h2 class="text-4xl font-bold accent-text">Roll of Honour</h2>
+                        <p class="mt-3 text-lg text-gray-600 dark:text-gray-300 light:text-[#23153c]">Celebrating our team's outstanding contributions and achievements.</p>
                     </div>
-                    <div class="max-w-5xl mx-auto relative">
-                        <div id="rnr-carousel" class="relative overflow-hidden rounded-lg shadow-lg bg-gray-50 p-8 min-h-[450px]">
-                            <!-- Rewards & Recognition Slide -->
-                            <div class="rnr-carousel-item duration-700 ease-in-out">
-                                <h3 class="text-2xl font-bold text-center mb-6 text-indigo-600">Rewards & Recognition</h3>
-                                <div class="grid md:grid-cols-2 gap-x-8 gap-y-10 text-left">
-                                    <div class="bg-white p-4 rounded-lg shadow">
-                                        <h4 class="font-bold text-lg mb-3 text-amber-500 flex items-center"><i class="fas fa-star mr-2"></i>Spot Awards</h4>
-                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                            <li>Akansha</li>
-                                            <li>Khushi Khandelwal</li>
-                                            <li>Nagaruru Nithya Sai Rachana</li>
-                                            <li>Padma Lochan Choudhury</li>
-                                            <li>Sabhya Punjabi</li>
-                                            <li>Srishti Bhandary</li>
-                                        </ul>
+                    <div class="max-w-6xl mx-auto relative">
+                        <div id="awards-carousel" class="relative overflow-hidden rounded-lg p-4 min-h-[700px]">
+                            <!-- Swaroop S Kaushik - Crime Buster Award -->
+                            <div class="award-slide active">
+                                <div class="award-card">
+                                    <div class="award-header">
+                                        <h3 class="award-title typing-animation">The Crime Buster Award</h3>
+                                        <h4 class="award-recipient">Swaroop S Kaushik</h4>
                                     </div>
-                                    <div class="bg-white p-4 rounded-lg shadow">
-                                        <h4 class="font-bold text-lg mb-3 text-blue-500 flex items-center"><i class="fas fa-trophy mr-2"></i>SDC Awards</h4>
-                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                            <li>Aanchal Mutreja</li>
-                                            <li>Aman Husain</li>
-                                            <li>Manish Kumar Sahu</li>
-                                            <li>Shwetabh Trivedi</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-white p-4 rounded-lg shadow md:col-span-2">
-                                        <h4 class="font-bold text-lg mb-3 text-green-500 flex items-center"><i class="fas fa-chart-line mr-2"></i>Half Yearly H1 - 2025</h4>
-                                        <ul class="list-disc list-inside space-y-1 text-gray-600">
-                                            <li>Aman Husain</li>
-                                            <li>Nanda Krishnan</li>
-                                        </ul>
+                                    <div class="award-content">
+                                        <p>Swaroop consistently demonstrates continuous excellence in metrics, surpassing KPI targets that significantly impact company goals. He efficiently cleared the non-suspicious secondary review backlog while maintaining SLA standards and providing daily status updates to management. His commitment to Stripe's growth is evident through his active participation in the hiring process as a team screener, helping build high-performing teams and ensuring candidates align with the company's values and culture.</p>
+                                        <p>He exhibits exceptional commitment by taking initiative on new challenges and projects, demonstrating exemplary leadership while managing the filing team. He successfully balances training responsibilities with daily targets. His resilient approach to challenges and consistently positive attitude toward new responsibilities showcase his growth mindset and commitment to learning, making him a role model who inspires excellence in others.</p>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Kudos Slide -->
-                             <div class="rnr-carousel-item hidden duration-700 ease-in-out">
-                                <h3 class="text-2xl font-bold text-center mb-6 text-indigo-600">Kudos</h3>
-                                 <div class="space-y-6 text-left max-w-3xl mx-auto">
-                                     <div class="bg-white p-6 rounded-lg shadow">
-                                         <h4 class="font-bold text-lg mb-2 text-gray-700">For the month of June 2025</h4>
-                                         <ul class="list-none space-y-3 text-gray-600">
-                                             <li class="flex items-start"><i class="fas fa-quote-left text-indigo-200 mr-3 mt-1"></i><span><span class="font-semibold">Khushi Khandelwal</span> - For helping out a new hire with a complex case.</span></li>
-                                             <li class="flex items-start"><i class="fas fa-quote-left text-indigo-200 mr-3 mt-1"></i><span><span class="font-semibold">Srishti Bhandary</span> - For proactively identifying a new risk typology.</span></li>
-                                         </ul>
-                                     </div>
-                                      <div class="bg-white p-6 rounded-lg shadow">
-                                         <h4 class="font-bold text-lg mb-2 text-gray-700">For the month of May 2025</h4>
-                                         <ul class="list-none space-y-3 text-gray-600">
-                                             <li class="flex items-start"><i class="fas fa-quote-left text-indigo-200 mr-3 mt-1"></i><span><span class="font-semibold">Aman Husain</span> - For successfully leading a project with a tight deadline.</span></li>
-                                             <li class="flex items-start"><i class="fas fa-quote-left text-indigo-200 mr-3 mt-1"></i><span><span class="font-semibold">Manish Kumar Sahu</span> - For creating a new tool that improved team's efficiency.</span></li>
-                                         </ul>
+
+                            <!-- Pradyumn Gupta - Task Titan Award -->
+                            <div class="award-slide">
+                                <div class="award-card">
+                                    <div class="award-header">
+                                        <h3 class="award-title typing-animation">Task Titan Award</h3>
+                                        <h4 class="award-recipient">Pradyumn Gupta</h4>
+                                    </div>
+                                    <div class="award-content">
+                                        <p>Pradyumn has been on top of his performance metrics - exceeding on productivity (100%+) while maintaining 0 errors. He was also very instrumental in training and mentoring new joiners in the team on US process. He did an exceptional job in ensuring the trainees are having the right understanding and applying it while working on cases. The feedback Pradyumn received was very good as well, and helped him with the training opportunity for upcoming batches in SDC as well as in the vendor site.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hemanth Harish G - Task Titan Award -->
+                            <div class="award-slide">
+                                <div class="award-card">
+                                    <div class="award-header">
+                                        <h3 class="award-title typing-animation">Task Titan Award</h3>
+                                        <h4 class="award-recipient">Hemanth Harish G</h4>
+                                    </div>
+                                    <div class="award-content">
+                                        <p>Hemanth has been a key member of the team, pivotal in our IN AML Investigation and SAR Filings workflow transitions. He consistently demonstrates a humble approach, always ready to learn and adapt. His meticulous craft shines through in his precise and accurate handling of critical weekly SAR reporting for Stripe India. Hemanth truly embodies moving with urgency and focus, as evidenced by his instrumental support to the IN MLRO in drafting and updating vital workflows. His strong rapport with the India Compliance Team further highlights his collaborative nature and dedication to operational excellence.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rebecca Siangshai - Rookie Rockstar Award -->
+                            <div class="award-slide">
+                                <div class="award-card">
+                                                                        <div class="award-header">
+                                        <h3 class="award-title typing-animation">The Rookie Rockstar Award</h3>
+                                        <h4 class="award-recipient">Rebecca Siangshai</h4>
+                                    </div>
+                                    <div class="award-content">
+                                        <p>Rebecca has scaled up quickly in the AML Investigations process. Within a short time, she has demonstrated her process expertise in the US investigations. This helped her get selected for the CHS workflow, which is very complex and required approval from the US regional team to be trained on. She has been consistently performing high quality work which has been recognised by the regional SMEs, all the while maintaining consistent productivity.</p>
                                      </div>
                                  </div>
                              </div>
-                            <!-- Shoutouts Slide -->
-                             <div class="rnr-carousel-item hidden duration-700 ease-in-out">
-                                <h3 class="text-2xl font-bold text-center mb-6 text-indigo-600">Shoutouts</h3>
-                                <div class="space-y-6 text-left max-w-3xl mx-auto">
-                                     <div class="bg-white p-6 rounded-lg shadow">
-                                         <h4 class="font-bold text-lg mb-2 text-green-600 flex items-center"><i class="fas fa-award mr-2"></i>100% Quality in Q2 2025</h4>
-                                         <p class="text-gray-600">A huge congratulations to the following team members for their outstanding commitment to quality!</p>
-                                         <div class="flex flex-wrap gap-2 mt-3">
-                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Aanchal Mutreja</span>
-                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Aman Husain</span>
-                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Manish Kumar Sahu</span>
-                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Shwetabh Trivedi</span>
+
+                            <!-- Arshanath Sasidharan Nalini - SDC Innovator Award -->
+                            <div class="award-slide">
+                                <div class="award-card">
+                                    <div class="award-header">
+                                        <h3 class="award-title typing-animation">SDC Innovator Award</h3>
+                                        <h4 class="award-recipient">Arshanath Sasidharan Nalini</h4>
+                                    </div>
+                                    <div class="award-content">
+                                        <p>Arshanath has proven to be an invaluable asset to the AML team since joining last year. He rapidly mastered various AML workflows, consistently delivering strong performance across them. Beyond his regular responsibilities, Arshanath has been a key driver of automation and efficiency improvements.</p>
+                                        <p>A recent collaboration with FC Engineering and the Data Ledger team to automate part of the AML investigation process, which he successfully concluded, now saves the team approximately 20 minutes per case, translating to an estimated annual saving of 24,000 hours. This impactful project required significant collaborative effort with multiple engineering teams to effectively communicate and implement our requirements. Currently, Arshanath continues to contribute to other automation initiatives and regularly supports the team with smaller efficiency tools and queries for large data analysis. His strong AML domain expertise, combined with his technical acumen and proactive approach, has significantly advanced our goal of achieving a more efficient workflow.</p>
+                                    </div>
                                          </div>
                                      </div>
-                                      <div class="bg-white p-6 rounded-lg shadow">
-                                         <h4 class="font-bold text-lg mb-2 text-green-600 flex items-center"><i class="fas fa-award mr-2"></i>100% Quality in Q1 2025</h4>
-                                         <p class="text-gray-600">A big round of applause for these individuals who set the bar high at the start of the year!</p>
-                                          <div class="flex flex-wrap gap-2 mt-3">
-                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Khushi Khandelwal</span>
-                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Nagaruru Nithya Sai Rachana</span>
-                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Padma Lochan Choudhury</span>
-                                            <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Sabhya Punjabi</span>
+
+                            <!-- Ashwini H - SDC Excellence Award -->
+                            <div class="award-slide">
+                                <div class="award-card">
+                                    <div class="award-header">
+                                        <h3 class="award-title typing-animation">SDC Excellence Award</h3>
+                                        <h4 class="award-recipient">Ashwini H</h4>
+                                    </div>
+                                    <div class="award-content">
+                                        <p>Ashwini exemplifies what it means to Move with Urgency and Focus while delivering outstanding results. As a key player in our AML vendor onboarding for the CRR plan, she has consistently demonstrated excellence in vendor nesting while maintaining 100% productivity and high quality standards. Her recent undertaking of complex CHS work, combined with her vital role in case assignment, shows her commitment to being meticulous in her craft. Ashwini not only meets but exceeds core performance metrics.</p>
                                           </div>
+                                </div>
+                            </div>
+
+                            <!-- Shashi Mehta - SDC Excellence Award -->
+                            <div class="award-slide">
+                                <div class="award-card">
+                                    <div class="award-header">
+                                        <h3 class="award-title typing-animation">SDC Excellence Award</h3>
+                                        <h4 class="award-recipient">Shashi Mehta</h4>
+                                    </div>
+                                    <div class="award-content">
+                                        <p>As the US team scaled up in SDC BLR in 2025, Shashi played a crucial role in various capacities. She has been consistent with her productivity (100%+) while maintaining a good quality score. Despite being new to the process, she trained a batch of 5 HC on AML Investigations in Feb. She was also elevated to the SecRev role for the US process based on her consistent performance. She scaled up quickly on this role and helped the team with best practices. She also supported during the time when there was a volume spike and toggled between the BAU queue and SecRev queue. She also supported the JIRA tickets coming in for AML/adverse media review alongside her BAU work.</p>
                                      </div>
                                  </div>
                              </div>
                         </div>
+                        
                         <!-- Carousel Controls -->
-                        <button id="rnr-prevBtn" class="absolute top-1/2 left-0 md:-left-12 transform -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-3 shadow-md transition"><i class="fas fa-chevron-left text-gray-700"></i></button>
-                        <button id="rnr-nextBtn" class="absolute top-1/2 right-0 md:-right-12 transform -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-3 shadow-md transition"><i class="fas fa-chevron-right text-gray-700"></i></button>
+                        <button id="awards-prevBtn" class="carousel-btn prev-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="awards-nextBtn" class="carousel-btn next-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <!-- Slide Indicators -->
+                        <div class="slide-indicators">
+                            <span class="indicator active" data-slide="0"></span>
+                            <span class="indicator" data-slide="1"></span>
+                            <span class="indicator" data-slide="2"></span>
+                            <span class="indicator" data-slide="3"></span>
+                            <span class="indicator" data-slide="4"></span>
+                            <span class="indicator" data-slide="5"></span>
+                            <span class="indicator" data-slide="6"></span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -333,7 +351,7 @@
                         <p class="mt-3 text-lg text-gray-600">Don't miss out on our upcoming events.</p>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="card bg-white p-6 rounded-lg shadow-md">
+                        <div class="card p-6 flex flex-col">
                             <div class="flex items-center mb-4">
                                 <div class="bg-red-100 text-red-600 p-3 rounded-lg mr-4">
                                    <i class="fas fa-glass-cheers"></i>
@@ -345,7 +363,7 @@
                             </div>
                             <p class="text-gray-600">Get ready for our quarterly AML team party! More details on the venue and theme coming soon.</p>
                         </div>
-                         <div class="card bg-white p-6 rounded-lg shadow-md">
+                         <div class="card p-6 flex flex-col">
                             <div class="flex items-center mb-4">
                                 <div class="bg-yellow-100 text-yellow-600 p-3 rounded-lg mr-4">
                                    <i class="fas fa-award"></i>
@@ -357,7 +375,7 @@
                             </div>
                             <p class="text-gray-600">Join us as we celebrate the winners of the quarterly Rewards & Recognition program.</p>
                         </div>
-                         <div class="card bg-white p-6 rounded-lg shadow-md">
+                         <div class="card p-6 flex flex-col">
                             <div class="flex items-center mb-4">
                                 <div class="bg-blue-100 text-blue-600 p-3 rounded-lg mr-4">
                                    <i class="fas fa-users"></i>
@@ -376,32 +394,203 @@
 
         <!-- Watchlist Page Content -->
         <div id="page-watchlist" class="page-content">
-             <section class="py-20 fade-in">
+            <section class="py-20 fade-in">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12">
-                        <h2 class="text-4xl font-bold text-gray-900">The Watchlist</h2>
-                        <p class="mt-3 text-lg text-gray-600">Your quarterly newsletter for all things AML and Stripe.</p>
+                        <h1 class="text-4xl font-bold accent-text mb-4">The Watchlist</h1>
+                        <p class="text-xl text-gray-600 dark:text-gray-300 light:text-[#23153c] max-w-3xl mx-auto">
+                            Your quarterly insights into global finance, compliance, and industry trends
+                        </p>
                     </div>
-                    <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-inner">
-                        <div class="flex items-start">
-                            <div class="text-4xl text-indigo-500 mr-6 mt-1"><i class="fas fa-newspaper"></i></div>
-                            <div>
-                                <h3 class="text-2xl font-bold mb-3">Stay Updated</h3>
-                                <p class="text-gray-600 leading-relaxed">The Watchlist is your go-to source for current updates specific to AML and Stripe. Here, we'll share information about new tooling, innovative ideas from the team, and key industry trends. Check back each quarter for the latest issue!</p>
-                                <a href="#" class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">Read the Latest Edition <i class="fas fa-arrow-right ml-1"></i></a>
-                            </div>
+                    
+                    <!-- Blog Posts Grid -->
+                    <div class="max-w-6xl mx-auto">
+                        <div class="grid md:grid-cols-2 gap-8 mb-8">
+                            
+                            <!-- International Trade Blog Post Card -->
+                            <article class="blog-card floating-text cursor-pointer" onclick="window.location.href='blog/international-trade.html'">
+                                <div class="blog-featured-image">
+                                    <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                         alt="Global trade and shipping containers" 
+                                         class="w-full h-48 object-cover rounded-t-lg">
+                                    <div class="blog-overlay">
+                                        <span class="blog-category">Global Finance</span>
+                                    </div>
+                                </div>
+                                <div class="blog-content p-6">
+                                    <div class="blog-meta mb-3">
+                                        <span class="blog-date text-sm text-gray-500 dark:text-gray-400">Aug 2025</span>
+                                        <span class="blog-read-time text-sm text-gray-500 dark:text-gray-400">• 15 min read</span>
+                                        <span class="blog-author text-sm text-gray-500 dark:text-gray-400">• By Lokesh Raju</span>
+                                    </div>
+                                    <h2 class="blog-title text-2xl font-bold mb-3 accent-text">Understanding International Trade & Global Currency Systems</h2>
+                                    <p class="blog-excerpt text-gray-600 dark:text-gray-300 mb-4">
+                                        Explore how the U.S. dollar became the world's dominant currency, the role of the Bretton Woods Agreement, 
+                                        and the modern systems that power global finance including SWIFT, IMF, and the World Bank.
+                                    </p>
+                                    <div class="blog-tags">
+                                        <span class="tag">Currency</span>
+                                        <span class="tag">Trade</span>
+                                        <span class="tag">SWIFT</span>
+                                        <span class="tag">IMF</span>
+                                    </div>
+                                    <div class="blog-cta mt-4">
+                                        <span class="text-indigo-600 dark:text-indigo-400 font-semibold">Read Full Article <i class="fas fa-arrow-right ml-2"></i></span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- AML Fundamentals Blog Post Card -->
+                            <article class="blog-card floating-text cursor-pointer" onclick="window.location.href='blog/aml-fundamentals.html'">
+                                <div class="blog-featured-image">
+                                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                         alt="Financial security and compliance" 
+                                         class="w-full h-48 object-cover rounded-t-lg">
+                                    <div class="blog-overlay">
+                                        <span class="blog-category">AML Compliance</span>
+                                    </div>
+                                </div>
+                                <div class="blog-content p-6">
+                                    <div class="blog-meta mb-3">
+                                        <span class="blog-date text-sm text-gray-500 dark:text-gray-400">Aug 2025</span>
+                                        <span class="blog-read-time text-sm text-gray-500 dark:text-gray-400">• 12 min read</span>
+                                        <span class="blog-author text-sm text-gray-500 dark:text-gray-400">• By Chaitanya Vaddadi</span>
+                                    </div>
+                                    <h2 class="blog-title text-2xl font-bold mb-3 accent-text">Anti-Money Laundering: Fundamentals & Best Practices</h2>
+                                    <p class="blog-excerpt text-gray-600 dark:text-gray-300 mb-4">
+                                        A comprehensive guide to understanding money laundering, the three-stage process, prevention strategies, 
+                                        global regulatory frameworks, and the essential components of effective AML programs. Includes practical red flags and real-world examples.
+                                    </p>
+                                    <div class="blog-tags">
+                                        <span class="tag">AML</span>
+                                        <span class="tag">Compliance</span>
+                                        <span class="tag">Risk Management</span>
+                                        <span class="tag">Prevention</span>
+                                    </div>
+                                    <div class="blog-cta mt-4">
+                                        <span class="text-indigo-600 dark:text-indigo-400 font-semibold">Read Full Article <i class="fas fa-arrow-right ml-2"></i></span>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+
+        <!-- Pillars Page Content -->
+        <div id="page-pillars" class="page-content">
+            <section class="py-20 fade-in">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold">The Four Pillars</h2>
+                        <p class="mt-3 text-lg">Our team's foundation for excellence, innovation, and culture.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                        <!-- Pillar 1 -->
+                        <div class="card floating-text p-8 flex flex-col items-center text-center">
+                            <img src="images/vinayaks.jpg" alt="Vinayak Shenoy K" class="pillar-lead-img">
+                            <h3 class="text-2xl font-bold mb-2">Pillar 1: Run the Business</h3>
+                            <div class="mb-2 text-sm">DRI: <a href="mailto:vinayaks@stripe.com" class="underline text-indigo-400">Vinayak Shenoy K</a></div>
+                            <div class="mb-2 font-semibold">Focus: Operational excellence, delivery, execution</div>
+                            <ul class="mb-4 text-left mx-auto" style="max-width: 350px;">
+                                <li>• Managing day-to-day responsibilities</li>
+                                <li>• Meeting SLAs, deadlines, and KPIs</li>
+                                <li>• Ownership and accountability</li>
+                                <li>• Proactive risk and issue management</li>
+                            </ul>
+                            <p>This pillar is about <b>keeping the lights on</b>. It ensures we reliably deliver on our core responsibilities, maintain stakeholder trust, and stay consistent in our performance.</p>
+                        </div>
+                        <!-- Pillar 2 -->
+                        <div class="card floating-text p-8 flex flex-col items-center text-center">
+                            <img src="images/mohitaditya.jpg" alt="Mohit Aditya" class="pillar-lead-img">
+                            <h3 class="text-2xl font-bold mb-2">Pillar 2: Change the Business</h3>
+                            <div class="mb-2 text-sm">DRI: <a href="mailto:mohitaditya@stripe.com" class="underline text-indigo-400">Mohit Aditya</a></div>
+                            <div class="mb-2 font-semibold">Focus: Innovation, automation, process improvement, strategic thinking</div>
+                            <ul class="mb-4 text-left mx-auto" style="max-width: 350px;">
+                                <li>• Rethinking current ways of working</li>
+                                <li>• Driving initiatives to simplify, automate, or modernize</li>
+                                <li>• Learning from retrospectives and performance data</li>
+                                <li>• Trying new tools, tech, or methods</li>
+                            </ul>
+                            <p>This is how we <b>future-proof the team</b>. By continuously improving, we increase efficiency, adaptability, and the long-term impact of our work.</p>
+                        </div>
+                        <!-- Pillar 3 -->
+                        <div class="card floating-text p-8 flex flex-col items-center text-center">
+                            <img src="images/divyanayak.jpg" alt="Divya Nayak" class="pillar-lead-img">
+                            <h3 class="text-2xl font-bold mb-2">Pillar 3: People & Culture</h3>
+                            <div class="mb-2 text-sm">DRI: <a href="mailto:divyanayak@stripe.com" class="underline text-indigo-400">Divya Nayak</a></div>
+                            <div class="mb-2 font-semibold">Focus: Team engagement, growth, wellbeing, inclusion</div>
+                            <ul class="mb-4 text-left mx-auto" style="max-width: 350px;">
+                                <li>• Fostering psychological safety and team connection</li>
+                                <li>• Supporting individual growth plans and learning</li>
+                                <li>• Encouraging regular feedback and recognition</li>
+                                <li>• Advancing DEI efforts and a strong sense of belonging</li>
+                            </ul>
+                            <p>A <b>healthy, motivated team outperforms</b>. This pillar focuses on the <i>how</i> behind the <i>what</i>—ensuring we're a high-functioning, supportive, and inclusive team.</p>
+                        </div>
+                        <!-- Pillar 4 -->
+                        <div class="card floating-text p-8 flex flex-col items-center text-center">
+                            <img src="images/ajayant.jpg" alt="Aparna Jayant" class="pillar-lead-img">
+                            <h3 class="text-2xl font-bold mb-2">Pillar 4: Quality & Craft</h3>
+                            <div class="mb-2 text-sm">DRI: <a href="mailto:ajayant@stripe.com" class="underline text-indigo-400">Aparna Jayant</a></div>
+                            <div class="mb-2 font-semibold">Focus: Excellence in delivery and discipline-specific best practices</div>
+                            <ul class="mb-4 text-left mx-auto" style="max-width: 350px;">
+                                <li>• Peer reviews, testing, and coding/content standards</li>
+                                <li>• Learning from bugs, mistakes, and feedback</li>
+                                <li>• Investing in tools and upskilling</li>
+                                <li>• Taking pride in the craft and final outcomes</li>
+                            </ul>
+                            <p>It's not just about delivery—it's about delivering <b>valuable, sustainable, high-quality</b> work we're proud of.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Add new Leads page with org chart -->
+        <div id="page-leads" class="page-content">
+            <section class="py-20 fade-in">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold accent-text mb-2">Meet Our Leads</h2>
+                        <div class="flex flex-col items-center justify-center gap-2 mb-4">
+                          <span class="text-3xl accent-text"><i class="fas fa-users"></i></span>
+                          <p class="mt-2 text-lg max-w-2xl mx-auto">Our leadership team brings together deep expertise, vision, and a passion for excellence. Each lead is dedicated to empowering their teams, driving innovation, and upholding the highest standards of integrity and impact across the AML organization.</p>
+                        </div>
+                        <div class="w-full flex justify-center mt-4 mb-8">
+                          <div class="flex items-center gap-4">
+                            <div class="h-2 w-2 rounded-full bg-[#635bff] opacity-60"></div>
+                            <div class="h-1 w-16 rounded bg-[#635bff] opacity-30"></div>
+                            <div class="h-2 w-2 rounded-full bg-[#635bff] opacity-60"></div>
+                            <div class="h-1 w-16 rounded bg-[#635bff] opacity-30"></div>
+                            <div class="h-2 w-2 rounded-full bg-[#635bff] opacity-60"></div>
+                          </div>
+                        </div>
+                    </div>
+                    <div id="org-chart-container" class="org-chart constellation-content">
+                        <!-- JS will inject the chart here -->
                     </div>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 SDC AML Team. All Rights Reserved.</p>
-            <p class="text-sm text-gray-400 mt-2">Built with <i class="fas fa-heart text-red-500"></i> for the best team.</p>
+    <!-- Creative Footer -->
+    <footer class="footer-glassmorphism">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-icon"><i class="fas fa-shield-halved"></i></span>
+                <span class="footer-copyright">&copy; 2025 SDC AML Team.</span>
+            </div>
+            <div class="footer-center">
+                <span class="footer-built">Built with <i class="fas fa-heart"></i> for the best team.</span>
+            </div>
+            <div class="footer-right">
+                <button class="footer-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
+            </div>
         </div>
     </footer>
 
